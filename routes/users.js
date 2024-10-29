@@ -111,14 +111,16 @@ router.post("/login", async (req, res) => {
 });
 
 router.get(`/get/count`, async (req, res) => {
-  const userCount = await User.countDocuments((count) => count);
+  try {
+    const userCount = await User.countDocuments();
 
-  if (!userCount) {
+    res.status(200).send({
+      userCount: userCount,
+    });
+  } catch (error) {
+    console.error("Error counting users:", error);
     res.status(500).json({ success: false });
   }
-  res.send({
-    userCount: userCount,
-  });
 });
 
 router.delete("/:id", (req, res) => {
