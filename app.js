@@ -30,7 +30,7 @@ app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
-
+//connect mongo
 mongoose
   .connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
