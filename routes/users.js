@@ -12,7 +12,7 @@ router.get(`/`, async (req, res) => {
   }
   res.send(userList);
 });
-
+//get user by id
 router.get("/:id", async (req, res) => {
   const user = await User.findById(req.params.id).select("-passwordHash");
 
@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
 
   res.send(user);
 });
-
+//add user
 router.post("/", async (req, res) => {
   let user = new User({
     name: req.body.name,
@@ -61,7 +61,7 @@ router.post("/register", async (req, res) => {
 
   res.send(user);
 });
-
+//update user
 router.put("/:id", async (req, res) => {
   const userExist = await User.findById(req.params.id);
   let newPassword;
@@ -91,7 +91,7 @@ router.put("/:id", async (req, res) => {
 
   res.send(user);
 });
-
+//login
 router.post("/login", async (req, res) => {
   const user = await User.findOne({
     email: req.body.email,
@@ -122,7 +122,7 @@ router.get(`/get/count`, async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
-
+//delete user
 router.delete("/:id", (req, res) => {
   User.findByIdAndDelete(req.params.id)
     .then((user) => {
